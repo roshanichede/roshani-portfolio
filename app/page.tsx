@@ -11,7 +11,7 @@ import { Typewriter } from "react-simple-typewriter"
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home")
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(true)
   const [showNavigation, setShowNavigation] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
@@ -755,7 +755,7 @@ export default function Portfolio() {
             >
               <motion.img
                 key={isDarkMode ? "hero2" : "hero1"}
-                src={isDarkMode ? "/hero2.png" : "/hero1.png"}
+                src={isDarkMode ? "/hero2.PNG" : "/hero1.PNG"}
                 alt="Cheerful girl working at cozy desk"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -1106,7 +1106,7 @@ export default function Portfolio() {
                     {/* Actual Image */}
                     <div className="absolute inset-1 rounded-2xl overflow-hidden shadow-2xl">
                       <img
-                        src="/profile.jpg"
+                        src="/profile.JPG"
                         alt="Roshani - Creative Developer"
                         className="w-full h-full object-cover"
                       />
