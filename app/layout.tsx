@@ -16,8 +16,9 @@ const quicksand = Quicksand({
 })
 
 export const metadata: Metadata = {
-  title: "Roshani Chede Portfolio",
+  title: "Roshani - Creative Developer Portfolio",
   description: "A creative developer who loves building beautiful, functional experiences",
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
