@@ -204,14 +204,12 @@ export default function Portfolio() {
         {
           title: "Full-Stack Developer & Browser Migration Lead – ICICI Lombard",
           period: "Apr 2023 – Sep 2024",
-          description:
-            "Led the Chrome Migration Project and Corporate Module development. Mentored junior team members, handled legacy system issues, and delivered modernized solutions.",
+          //description: "Led the Chrome Migration Project and Corporate Module development. Mentored junior team members, handled legacy system issues, and delivered modernized solutions.",
           technologies: [".NET Core", "PL/SQL", "Oracle", "JavaScript", "Jira"],
           projects: [
             {
               name: "Chrome Migration Project",
-              description:
-                "Resolved long-standing PDF rendering issues and led the migration of UI modules from IE to Chrome, addressing over 400 critical bugs.",
+              description: "Led the Chrome Migration Project, resolved long-standing PDF rendering issues and led the migration of UI modules from IE to Chrome, addressing over 400 critical bugs.",
               duration: "1 year",
               //technologies: [".NET Core", "JavaScript", "SQL Server", "Jira"],
             },
@@ -227,8 +225,7 @@ export default function Portfolio() {
         {
           title: "Accounts Module Lead Developer – ICICI Lombard",
           period: "Oct 2022 – Aug 2023",
-          description:
-            "Solely managed the entire Accounts Module, ensuring stable backend logic, SQL optimizations, and timely feature deliveries for critical financial workflows.",
+          //description: "Solely managed the entire Accounts Module, ensuring stable backend logic, SQL optimizations, and timely feature deliveries for critical financial workflows.",
           technologies: [".NET Core", "PL/SQL", "Oracle"],
           projects: [
             {
@@ -243,8 +240,7 @@ export default function Portfolio() {
         {
           title: "Blockchain Developer – BTG BI - Blockchain COE",
           period: "Jun 2022 – Sep 2022",
-          description:
-            "Worked on a blockchain-based project using Hyperledger Fabric. Developed smart contract logic and contributed to network setup.",
+          //description:"Worked on a blockchain-based project using Hyperledger Fabric. Developed smart contract logic and contributed to network setup.",
           technologies: ["Hyperledger Fabric", "Node.js", "YAML", "Docker"],
           projects: [
             {
@@ -259,8 +255,7 @@ export default function Portfolio() {
         {
           title: "Production Support Engineer – ICICI Prudential",
           period: "Nov 2020 – Apr 2022",
-          description:
-            "Provided end-to-end production support for a live claims and vendor management system. Handled incidents, debugged backend logic, and implemented emergency fixes.",
+          //description:"Provided end-to-end production support for a live claims and vendor management system. Handled incidents, debugged backend logic, and implemented emergency fixes.",
           technologies: ["ASP.NET MVC Core", "PL/SQL"],
           projects: [
             {
@@ -277,8 +272,8 @@ export default function Portfolio() {
     {
       company: "Creative Capsule",
       period: "Jun 2018 – Jul 2018",
-      logo: <Icon icon="icon- [bi--cc - circle]" />,
-      
+      //logo: <Icon icon="cc-outline" />,
+      logo: <Icon icon="cc-square-fill" />,
       roles: [
         {
           title: "Student Intern – Frontend Developer",
@@ -429,7 +424,17 @@ export default function Portfolio() {
       description: "My favorite hour to dream, think, or just be 🌌",
     },
   ]
-
+  
+  certificates: [
+    {
+      name: "Oracle PL/SQL Certification",
+      img: "/certificates/oracle-plsql.png"
+    },
+    {
+      name: "Secure Code Practices",
+      img: "/certificates/secure-code.png"
+    }
+  ]
 
   const renderStickyNote = (note: any, index: number) => {
     const baseClasses = `absolute cursor-pointer transform transition-all duration-300 z-10 ${note.rotation}`
@@ -958,7 +963,7 @@ export default function Portfolio() {
                 //   }`}
                 >
                   <h1 className="text-4xl font-semibold font-quicksand tracking-tight">
-                    Hi, I'm <span className="text-purple-600">Roshani</span>
+                    Hi, I'm <span className={`${isDarkMode ? "text-purple-600" : "text-red-800"}`}>Roshani</span>
                     <motion.span
                       animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
                       transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2, delay: 1 }}
@@ -982,7 +987,7 @@ export default function Portfolio() {
         {/* About Section */}
         <section
           id="about"
-          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-800" : "bg-orange-50"}`}
+          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-800" : "bg-orange-100"}`}
         >
           <div className="container mx-auto px-6">
             <motion.div
@@ -992,7 +997,8 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="max-w-4xl mx-auto"
             >
-              <h2 className="text-5xl font-bold text-center mb-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+              {/* <h2 className="text-5xl font-bold text-center mb-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider"> */}
+              <h2 className={`text-5xl font-bold text-center mb-16 font-mono ${isDarkMode ? "bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600" : "bg-gradient-to-r from-orange-400 via-red-800 to-rose-300"}  bg-clip-text text-transparent tracking-wider`}>
                 &lt;About_Me/&gt;
               </h2>
 
@@ -1034,7 +1040,7 @@ export default function Portfolio() {
                       transition={{ delay: 0.1, duration: 0.6 }}
                     >
                       <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
-                        <span className="text-purple-400 font-semibold">💼 Experience: </span>
+                        <span className="text-red-400 font-semibold">💼 Experience: </span>
                         Worked for 4+ years in backend-heavy environments, developing robust systems using PL/SQL and
                         .NET. I’ve built and maintained secure Web Services and RESTful APIs, and ensured smooth
                         delivery of mission-critical features for production systems
@@ -1063,7 +1069,7 @@ export default function Portfolio() {
                       transition={{ delay: 0.5, duration: 0.6 }}
                     >
                       <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
-                        <span className="text-green-400 font-semibold">💡 Problem-solving & delivery:</span> I approach
+                        <span className="text-teal-600 font-semibold">💡 Problem-solving & delivery:</span> I approach
                         each feature, bug, and decision with curiosity, empathy, and long-term thinking.
                       </p>
                     </motion.div>
@@ -1306,7 +1312,7 @@ export default function Portfolio() {
         {/* Experience Section */}
         <section
           id="experience"
-          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-900" : "bg-purple-50"}`}
+          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-900" : "bg-orange-50"}`}
         >
           <div className="container mx-auto px-6">
             <motion.div
@@ -1427,9 +1433,9 @@ export default function Portfolio() {
                                       </span>
                                     </div>
 
-                                    <p className={`mb-4 leading-relaxed ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
+                                    {/* <p className={`mb-4 leading-relaxed ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
                                       {role.description}
-                                    </p>
+                                    </p> */}
 
                                     <div className="flex flex-wrap gap-2">
                                       {role.technologies.map((tech, techIndex) => (
@@ -1461,6 +1467,7 @@ export default function Portfolio() {
 
                                       <div className="space-y-4">
                                         {role.projects.map((project, projectIndex) => (
+                                          
                                           <motion.div
                                             key={projectIndex}
                                             initial={{ opacity: 0, x: 20 }}
@@ -1487,6 +1494,8 @@ export default function Portfolio() {
                                           </motion.div>
                                         ))}
                                       </div>
+                                      {/* Certificates Section - place this after the above div */}
+                                        
                                     </motion.div>
                                   )}
                                 </div>
