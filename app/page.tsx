@@ -20,6 +20,34 @@ type SkillsData = {
   [key: string]: Skill[]
 }
 
+type Certificate = {
+  title?: string;
+  image?: string; // image preview (e.g., a JPEG/PNG)
+  pdf?: string;   // full PDF link
+};
+
+type Project = {
+  name: string;
+  description: string;
+  duration: string;
+};
+
+type Role = {
+  title: string;
+  period: string;
+  technologies: string[];
+  projects: Project[];
+};
+
+type CompanyType = {
+  company: string;
+  title: string;
+  period: string;
+  logo: React.ReactNode;
+  certificates: Certificate[];
+  roles: Role[];
+};
+
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home")
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -30,7 +58,9 @@ export default function Portfolio() {
   const [aboutInView, setAboutInView] = useState(false)
   const [activeCategory, setActiveCategory] = useState<keyof typeof skillsData | null>(null)
   const [expandedRole, setExpandedRole] = useState<{ companyIndex: number; roleIndex: number } | null>(null)
-  
+  const [previewCompany, setPreviewCompany] = useState<CompanyType | null>(null);
+  type SkillsCategory = keyof typeof skillsData
+  //const [activeCategory, setActiveCategory] = useState<SkillsCategory>("Programming Languages")
 
   // Track scroll position to show/hide navigation
   useEffect(() => {
@@ -140,7 +170,7 @@ export default function Portfolio() {
       //color: "#fbbf24",
       color: isDarkMode ? "#C8956D" : "#F5B041",
       rotation: "rotate-3",
-      left: "35%",
+      left: "55%",
       action: () => window.open("/resume.pdf", "_blank"),
     },
     {
@@ -148,24 +178,23 @@ export default function Portfolio() {
       label: "Hire Me",
       color: isDarkMode ? "#D4A574" : "#E9C39B",
       rotation: "-rotate-3",
-      left: "50%",
+      left: "65%",
       action: () => scrollToSection("contact"),
     },
   ]
 
   const skillsData = {
     "Programming Languages": [
-      { name: "VB.NET", icon: <Icon icon="vscode-icons:file-type-vb" /> },
-      { name: "C#", icon: <Icon icon="devicon:csharp" /> },
       { name: "C", icon: <Icon icon="streamline-logos:c-language-logo-block" /> },
       { name: "C++", icon: <Icon icon="logos:c-plusplus" /> },
       { name: "Java", icon: <Icon icon="mdi:language-java" /> },
+      { name: "C#", icon: <Icon icon="devicon:csharp" /> },
       { name: "Python", icon: <Icon icon="mdi:language-python" /> },
-      { name: "PL/SQL", icon: <Icon icon="vscode-icons:file-type-plsql" /> },
+      { name: "Visual Basic", icon: <Icon icon="vscode-icons:file-type-vb" /> },
     ],
     "Frameworks & Libraries": [
       { name: ".NET Core", icon: <Icon icon="devicon:dotnetcore" /> },
-      { name: "ASP.NET MVC", icon: <Icon icon="file-icons:asp" /> },
+      //{ name: "ASP.NET MVC", icon: <Icon icon="file-icons:asp" /> },
       { name: "AngularJS", icon: <Icon icon="logos:angular-icon" /> },
       { name: "React", icon: <Icon icon="logos:react" /> },
       { name: "Next.js", icon: <Icon icon="devicon:nextjs" /> },
@@ -173,14 +202,15 @@ export default function Portfolio() {
     "Web Development": [
       { name: "HTML", icon: <Icon icon="vscode-icons:file-type-html" /> },
       { name: "CSS", icon: <Icon icon="vscode-icons:file-type-css" /> },
+      { name: "Javascript", icon: <Icon icon="material-symbols:javascript" /> },
       { name: "Web APIs", icon: "🔗" },
       { name: "Web Services", icon: "🌐" },
       { name: "Tailwind CSS", icon: <Icon icon="devicon:tailwindcss" /> },
     ],
-    "Databases & Query Languages": [
-      { name: "SQL Server", icon: <Icon icon="devicon:microsoftsqlserver" /> },
+    "Database Platforms & Query Languages": [
+      { name: "MySQL", icon: <Icon icon="lineicons:mysql" /> },
       { name: "Oracle", icon: <Icon icon="devicon:oracle" /> },
-      { name: "PL/SQL", icon: "💾" },
+      { name: "PL/SQL", icon: <Icon icon="vscode-icons:file-type-plsql" /> },
       { name: "Supabase", icon: <Icon icon="logos:supabase-icon" /> },
     ],
     "Tools & Platforms": [
@@ -200,6 +230,39 @@ export default function Portfolio() {
       title: "Systems Engineer",
       period: "Oct 2020 - Sep 2024",
       logo: <Icon icon="simple-icons:tcs" />,
+      //logo: "tcs.png?height=50&width=50",
+      certificates: [
+        {
+          title: "Special Initiative Award",
+          image: "/company/tcs1.jpeg",
+          pdf: "/company/tcs1.pdf"
+        },
+        {
+          title: "On the Spot Team Award",
+          image: "/company/tcs2.jpeg",
+          pdf: "/company/tcs2.pdf"
+        },
+        {
+          title: "Star Team Award",
+          image: "/company/tcs3.jpeg",
+          pdf: "/company/tcs3.pdf"
+        },
+        {
+          title: "Star of the Month",
+          image: "/company/tcs4.jpeg",
+          pdf: "/company/tcs4.pdf"
+        },
+        {
+          title: "Special Initiative Award",
+          image: "/company/tcs5.jpeg",
+          pdf: "/company/tcs5.pdf"
+        },
+        {
+          title: "Star of the Month",
+          image: "/company/tcs6.jpeg",
+          pdf: "/company/tcs6.pdf"
+        }
+      ],
       roles: [
         {
           title: "Full-Stack Developer & Browser Migration Lead – ICICI Lombard",
@@ -271,9 +334,12 @@ export default function Portfolio() {
     },
     {
       company: "Creative Capsule",
+      title: "Student Intern",
       period: "Jun 2018 – Jul 2018",
-      //logo: <Icon icon="cc-outline" />,
-      logo: <Icon icon="cc-square-fill" />,
+      logo: <Icon icon="bi:cc-circle" />,
+      certificates: [ {
+        title: "Special Initiative Award",
+        image: "/company/Internship certificate.png" }],
       roles: [
         {
           title: "Student Intern – Frontend Developer",
@@ -311,8 +377,8 @@ export default function Portfolio() {
       live: "https://style-it.vercel.app/",
     },
     {
-      title: "Task Management App",
-      description: "A collaborative task management tool with real-time updates and team features",
+      title: "Digital Scrapbook",
+      description: "An e-scrapbook of memories",
       images: [
         "/placeholder.svg?height=200&width=300",
         "/placeholder.svg?height=200&width=300",
@@ -323,68 +389,7 @@ export default function Portfolio() {
       github: "https://github.com/roshanichede/taskmanager",
       live: "https://taskmanager-demo.vercel.app",
     },
-    {
-      title: "Weather Dashboard",
-      description: "A beautiful weather dashboard with location-based forecasts and interactive maps",
-      images: [
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-      ],
-      tech: ["Vue.js", "OpenWeather API", "Chart.js"],
-      github: "https://github.com/roshanichede/weather-dashboard",
-      live: "https://weather-dashboard-demo.vercel.app",
-    },
-    {
-      title: "Portfolio Website",
-      description: "A responsive portfolio website with dark mode and smooth animations",
-      images: [
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-      ],
-      tech: ["Next.js", "Framer Motion", "Tailwind CSS"],
-      github: "https://github.com/roshanichede/portfolio",
-      live: "https://roshanichede.vercel.app",
-    },
-    {
-      title: "Blog Platform",
-      description: "A modern blog platform with markdown support and comment system",
-      images: [
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-      ],
-      tech: ["Next.js", "MDX", "Prisma", "PostgreSQL"],
-      github: "https://github.com/roshanichede/blog",
-      live: "https://blog-demo.vercel.app",
-    },
-    {
-      title: "Chat Application",
-      description: "Real-time chat application with rooms, file sharing, and emoji reactions",
-      images: [
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-        "/placeholder.svg?height=200&width=300",
-      ],
-      tech: ["React", "Socket.io", "Express", "Redis"],
-      github: "https://github.com/roshanichede/chat-app",
-      live: "https://chat-demo.vercel.app",
-    },
   ]
-
-  // const galleryItems = [
-  //   { title: "B.E. Gold Medalist", image: "/convocation.JPG?height=200&width=300", category: "College" },
-  //   { title: "Tokyo Adventure", image: "/placeholder.svg?height=200&width=300", category: "Travel" },
-  //   { title: "UI Design System", image: "/placeholder.svg?height=200&width=300", category: "Design" },
-  //   { title: "Mountain Hiking", image: "/placeholder.svg?height=200&width=300", category: "Adventure" },
-  //   { title: "Cup of Tea n more", image: "/chai 2.jpg?height=200&width=300", category: "Cup of Tea n more" },
-  //   { title: "Art", image: "/art.HEIC?height=200&width=300", category: "Creative" },
-  // ]
 
   const galleryItems = [
     {
@@ -403,7 +408,7 @@ export default function Portfolio() {
       title: "Custom Artworks",
       image: "/art.jpg",
       category: "Creative",
-      description: "I make tiny, cute pieces of joy for people I love 🎨",
+      description: "I make tiny, cute pieces of joy for people 🎨",
     },
     {
       title: "Beachside Life",
@@ -607,7 +612,7 @@ export default function Portfolio() {
   }
 
   const renderActionNote = (note: any, index: number) => {
-    const baseClasses = `absolute cursor-pointer transform transition-all duration-300 z-10 ${note.rotation}`
+    const baseClasses = `absolute cursor-pointer transform transition-all duration-150 z-10 ${note.rotation}`
 
     return (
       <motion.div
@@ -620,7 +625,7 @@ export default function Portfolio() {
           y: 0,
         }}
         transition={{
-          delay: 2.0 + index * 0.3,
+          //delay: 2.0 + index * 0.3,
           duration: 0.6,
           type: "spring",
           bounce: 0.4,
@@ -629,7 +634,7 @@ export default function Portfolio() {
           scale: 1.15,
           rotate: 0,
           y: -10,
-          transition: { duration: 0.2 },
+          transition: { duration: 0.1 },
         }}
         whileTap={{ scale: 0.9 }}
         className={baseClasses}
@@ -701,7 +706,7 @@ export default function Portfolio() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 1 }}
-                className="text-sm sm:text-base md:text-lg lg:text-xl font-mono text-purple-600 whitespace-pre"
+                className={`text-sm sm:text-base md:text-lg lg:text-xl font-mono ${isDarkMode ? "text-purple-500" :"text-red-800" } whitespace-pre`}
               >
                 <motion.span
                   initial={{ width: 0 }}
@@ -710,7 +715,7 @@ export default function Portfolio() {
                     duration: 2.5,
                     ease: "linear",
                   }}
-                  className="overflow-hidden inline-block border-r-2 border-purple-600 animate-pulse"
+                  className={`overflow-hidden inline-block border-r-2 ${isDarkMode ? "border-purple-600" : "border-red-800" } animate-pulse`}
                   style={{
                     whiteSpace: "nowrap",
                   }}
@@ -953,7 +958,7 @@ export default function Portfolio() {
               </motion.div>
 
               {/* Intro Text - Now positioned at the top */}
-              <div className="absolute w-full" style={{ bottom: "-110px", left: "-50px" }}>
+              <div className="absolute w-full " style={{ bottom: "-90px", left: "0px" }}>
                 <motion.div
                   initial={{ opacity: 0, y: -30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -962,7 +967,8 @@ export default function Portfolio() {
                 // className={`mb-1 w-full backdrop-blur-sm rounded-xl px-6 py-6 shadow-md text-center transition-colors duration-500 ${isDarkMode ? "bg-gray-800/60 text-white" : "bg-white/10 text-gray-800"
                 //   }`}
                 >
-                  <h1 className="text-4xl font-semibold font-quicksand tracking-tight">
+                  {/* <h1 className="text-4xl font-semibold font-quicksand tracking-tight"> */}
+                  <h1 className="text-4xl font-semibold font-quicksand tracking-tight ">
                     Hi, I'm <span className={`${isDarkMode ? "text-purple-600" : "text-red-800"}`}>Roshani</span>
                     <motion.span
                       animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
@@ -972,11 +978,8 @@ export default function Portfolio() {
                       👋
                     </motion.span>
                   </h1>
-                  <p
-                    className={`mt-2 text-lg max-w-xl mx-auto font-light ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}
-                  >
-                    A creative developer crafting joyful, user-focused web experiences using modern tools & clean code
-                    ✨
+                  <p className={`mt-2 text-lg max-w-full mx-auto font-light ${isDarkMode ? "text-gray-300" : "text-red-600"}`}>
+                    Designing with intent. Coding with heart.✨
                   </p>
                 </motion.div>
               </div>
@@ -1041,9 +1044,8 @@ export default function Portfolio() {
                     >
                       <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
                         <span className="text-red-400 font-semibold">💼 Experience: </span>
-                        Worked for 4+ years in backend-heavy environments, developing robust systems using PL/SQL and
-                        .NET. I’ve built and maintained secure Web Services and RESTful APIs, and ensured smooth
-                        delivery of mission-critical features for production systems
+                        Over 4 years of experience in backend-driven environments, working with PL/SQL and .NET to build and support reliable systems. I’ve built and maintained secure Web Services and RESTful APIs, and ensured smooth
+                        delivery of critical features for production systems
                       </p>
                     </motion.div>
 
@@ -1054,12 +1056,13 @@ export default function Portfolio() {
                     >
                       <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
                         <span className="text-pink-400 font-semibold">⚙️ Modern tech focus:</span> I now build full-stack
-                        apps using <span className="font-semibold text-blue-400">React</span>,{" "}
+                        apps using React, Next.js. From frontend UI to backend logic, I care deeply about writing clean, scalable code and
+                        designing smooth, intuitive user experiences.
+                        {/* <span className="font-semibold text-blue-400">React</span>,{" "}
                         <span className="font-semibold text-blue-400">Next.js</span>,{" "}
                         <span className="font-semibold text-teal-400">Supabase</span>, and{" "}
-                        <span className="font-semibold text-sky-400">Tailwind CSS </span>
-                        From frontend UI to backend logic, I care deeply about writing clean, scalable code and
-                        designing smooth, intuitive user experiences.
+                        <span className="font-semibold text-sky-400">Tailwind CSS </span> */}
+                        
                       </p>
                     </motion.div>
 
@@ -1309,10 +1312,10 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Experience Section */}
+        {/* Tech Stack Section */}
         <section
           id="experience"
-          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-900" : "bg-orange-50"}`}
+          className={`py-8 transition-colors duration-500 ${isDarkMode ? "bg-gray-900" : "bg-purple-50"}`}
         >
           <div className="container mx-auto px-6">
             <motion.div
@@ -1322,215 +1325,20 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="max-w-6xl mx-auto"
             >
-              <h2 className="text-5xl font-bold text-center mb-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+              <h2 className="text-5xl font-bold text-center mb-16 mt-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
                 &lt;Experience/&gt;
               </h2>
 
-              {/* Professional Experience Section */}
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="mt-20"
-              >
-                <h3 className="text-3xl font-bold text-center mb-12 font-quicksand bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
-                  &lt;Professional_Experience/&gt;
-                </h3>
-
-                <div className="relative">
-                  {/* Timeline Line */}
-                  <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 via-pink-500 to-blue-500 rounded-full"></div>
-
-                  <div className="space-y-12">
-                    {experiences.map((company, companyIndex) => (
-                      <motion.div
-                        key={companyIndex}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: companyIndex * 0.2, duration: 0.6 }}
-                        viewport={{ once: true }}
-                        className="relative w-full" 
-                      >
-                        {/* Company Header */}
-                        <div className="flex items-center mb-8">
-                          <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 -translate-x-1/2 w-32 h-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg z-10">
-                            {/* <img
-                              src={company.logo || "/placeholder.svg"}
-                              alt={`${company.company} logo`}
-                              className="w-8 h-8 rounded-full bg-white p-1"
-                            /> */}
-                            <div className="w-24 h-24 rounded-full bg-black p-1 flex items-center justify-center">
-                              <div className="text-5xl text-white">
-                              {typeof company.logo === "string" ? company.logo : company.logo}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div
-                            className={`ml-20 md:ml-0 ${companyIndex % 2 === 0 ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"} max-w-md`}
-                          >
-                            <motion.div
-                              whileHover={{ scale: 1.02 }}
-                              className={`p-6 rounded-2xl shadow-lg ${isDarkMode ? "bg-gray-700 border border-gray-600" : "bg-white border border-gray-200"
-                                } hover:shadow-xl transition-all duration-300`}
-                            >
-                              <h4 className={`text-2xl font-bold mb-2 ${isDarkMode ? "text-white" : "text-gray-800"}`}>
-                                {company.company}
-                              </h4>
-                              <p
-                                className={`text-sm font-medium ${isDarkMode ? "text-purple-400" : "text-purple-600"}`}
-                              >
-                                {company.title}
-                              </p>
-                              <p
-                                className={`text-sm font-medium ${isDarkMode ? "text-purple-400" : "text-purple-600"}`}
-                              >
-                                {company.period}
-                              </p>
-                            </motion.div>
-                          </div>
-                        </div>
-
-                        {/* Roles within Company */}
-                        <div className="ml-20 md:ml-0 space-y-8">
-                          
-                          {company.roles.map((role, roleIndex) => {
-                            const isExpanded = expandedRole?.companyIndex === companyIndex && expandedRole?.roleIndex === roleIndex;
-                            const isRight = companyIndex % 2 !== 0
-                            return (
-                              <motion.div
-                                key={roleIndex}
-                                initial={{ opacity: 0, x: isRight ? 30 : -30 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ delay: roleIndex * 0.1, duration: 0.5 }}
-                                viewport={{ once: true }}
-                                //className={`${companyIndex % 2 === 0 ? "md:mr-auto md:pr-16" : "md:ml-auto md:pl-16"} max-w-6xl`}
-                                className="w-full"
-                              >
-                                <div className={`flex flex-col md:flex-row ${isRight ? "md:flex-row-reverse" : ""} gap-4`}>
-                                  {/* Role Card */}
-                                  <div
-                                    onClick={() =>
-                                      setExpandedRole((prev) =>
-                                        prev?.companyIndex === companyIndex && prev?.roleIndex === roleIndex
-                                          ? null
-                                          : { companyIndex, roleIndex }
-                                      )
-                                    }
-                                    className={`cursor-pointer w-full md:w-1/2 p-6 rounded-2xl ${isDarkMode ? "bg-gray-800 border border-gray-700" : "bg-gray-50 border border-gray-200"
-                                    } shadow-md hover:shadow-xl transition-all duration-300`}
-                                  >
-                                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                                      <h5 className={`text-xl font-semibold ${isDarkMode ? "text-white" : "text-gray-800"}`}>
-                                        {role.title}
-                                      </h5>
-                                      <span
-                                        className={`text-sm font-medium px-3 py-1 rounded-full mt-2 md:mt-0 ${isDarkMode ? "bg-purple-900 text-purple-300" : "bg-purple-100 text-purple-700"
-                                          }`}
-                                      >
-                                        {role.period}
-                                      </span>
-                                    </div>
-
-                                    {/* <p className={`mb-4 leading-relaxed ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
-                                      {role.description}
-                                    </p> */}
-
-                                    <div className="flex flex-wrap gap-2">
-                                      {role.technologies.map((tech, techIndex) => (
-                                        <span
-                                          key={techIndex}
-                                          className={`px-3 py-1 rounded-full text-sm font-medium ${isDarkMode ? "bg-gray-700 text-gray-300" : "bg-white text-gray-700 border border-gray-200"
-                                            }`}
-                                        >
-                                          {tech}
-                                        </span>
-                                      ))}
-                                    </div>
-                                  </div>
-
-                                  {/* Sidebar Projects */}
-                                  {isExpanded && (
-                                    <motion.div
-                                      initial={{ x: isRight ? -50 : 50, opacity: 0 }}
-                                      animate={{ x: 0, opacity: 1 }}
-                                      transition={{ duration: 0.6 }}
-                                      className={`w-full md:w-1/2 p-5 rounded-xl shadow-md border-l-4 ${isDarkMode
-                                          ? "bg-gray-700/50 border-l-purple-500"
-                                          : "bg-white border-l-purple-500"
-                                        }`}
-                                    >
-                                      <h6 className={`text-lg font-semibold mb-4 ${isDarkMode ? "text-purple-400" : "text-purple-600"}`}>
-                                        Key Projects:
-                                      </h6>
-
-                                      <div className="space-y-4">
-                                        {role.projects.map((project, projectIndex) => (
-                                          
-                                          <motion.div
-                                            key={projectIndex}
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: projectIndex * 0.1, duration: 0.4 }}
-                                            whileHover={{ scale: 1.02, y: -2 }}
-                                            className={`p-4 rounded-lg shadow-sm ${isDarkMode ? "bg-gray-800" : "bg-purple-50"
-                                              }`}
-                                          >
-                                            <div className="flex justify-between items-center mb-2">
-                                              <h6 className={`font-semibold text-md ${isDarkMode ? "text-white" : "text-gray-800"}`}>
-                                                {project.name}
-                                              </h6>
-                                              <span
-                                                className={`text-xs px-2 py-1 rounded-full ${isDarkMode ? "bg-pink-900 text-pink-300" : "bg-pink-100 text-pink-700"
-                                                  }`}
-                                              >
-                                                {project.duration}
-                                              </span>
-                                            </div>
-                                            <p className={`text-sm ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
-                                              {project.description}
-                                            </p>
-                                          </motion.div>
-                                        ))}
-                                      </div>
-                                      {/* Certificates Section - place this after the above div */}
-                                        
-                                    </motion.div>
-                                  )}
-                                </div>
-                            </motion.div>
-                            );
-                          })}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Tech Stack Section */}
-        <section
-          id="techstack"
-          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-900" : "bg-purple-50"}`}
-        >
-          <div className="container mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="max-w-6xl mx-auto"
-            >
-              <h2 className="text-5xl font-bold text-center mb-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+              {/* <h3 className="text-5xl font-bold text-center mb-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
                 &lt;TechStack/&gt;
-              </h2>
+              </h3> */}
+
+              <h3 className="text-3xl font-bold text-center mb-8 font-quicksand bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+                &lt;TechStack/&gt;
+              </h3>
 
               {/* Category Pills */}
-              <div className="flex flex-wrap justify-center gap-3 mb-12">
+              <div className="flex flex-wrap justify-center gap-3 mb-0">
                 {(Object.keys(skillsData) as Array<keyof typeof skillsData>).map((category, index) => (
                   <motion.button
                     key={category}
@@ -1594,7 +1402,7 @@ export default function Portfolio() {
                     }`}
                 >
                   {(Object.keys(skillsData) as Array<keyof typeof skillsData>).map((category) => {
-                    if (activeCategory === null || activeCategory === category) {
+                    if (activeCategory === category) {
                       return skillsData[category].map((skill: Skill, index: number) => (
                         <motion.div
                           key={`${category}-${skill.name}`}
@@ -1655,7 +1463,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* Category Statistics */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.5 }}
@@ -1665,7 +1473,312 @@ export default function Portfolio() {
                   <p className={`text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
                     <span className="font-semibold text-purple-500">{Object.keys(skillsData).length}</span> Tech Stacks
                   </p>
-                </motion.div>
+                </motion.div> */}
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Experience Section */}
+        <section
+          id="experience"
+          className={`py-4 transition-colors duration-500 ${isDarkMode ? "bg-gray-900" : "bg-orange-50"}`}
+        >
+          <div className="container mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="max-w-6xl mx-auto"
+            >
+              {/* <h2 className="text-5xl font-bold text-center mb-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+                &lt;Experience/&gt;
+              </h2> */}
+
+              {/* Professional Experience Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="mt-20"
+              >
+                <h3 className="text-3xl font-bold text-center mb-12 font-quicksand bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+                  &lt;Professional_Experience/&gt;
+                </h3>
+
+                <div className="relative">
+                  {/* Timeline Line */}
+                  <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 via-pink-500 to-blue-500 rounded-full"></div>
+
+                  <div className="space-y-12">
+                    {experiences.map((company, companyIndex) => (
+                      <motion.div
+                        key={companyIndex}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: companyIndex * 0.2, duration: 0.6 }}
+                        viewport={{ once: true }}
+                        className="relative w-full"
+                      >
+                        {/* Company Header */}
+                        <div className="flex items-center mb-8">
+                          <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 -translate-x-1/2 w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg z-10">
+                            {/* <img
+                              src={company.logo}
+                              alt={`${company.company} logo`}
+                              className="w-12 h-12 rounded-full bg-white p-1"
+                            /> */}
+                            <div className="w-12 h-12 rounded-full bg-white p-1 flex items-center justify-center">
+                              <div className="text-3xl text-black">
+                              {typeof company.logo === "string" ? company.logo : company.logo}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            className={`ml-20 md:ml-0 ${companyIndex % 2 === 0 ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"} max-w-md`}
+                          >
+                            <motion.div
+                              whileHover={{ scale: 1.02 }}
+                              className={`p-6 rounded-2xl shadow-lg ${isDarkMode ? "bg-gray-700 border border-gray-600" : "bg-white border border-gray-200"
+                                } hover:shadow-xl transition-all duration-300`}
+                            >
+                              <h4 className={`text-2xl font-bold mb-2 ${isDarkMode ? "text-white" : "text-gray-800"}`}>
+                                {company.company}
+                              </h4>
+                              <p
+                                className={`text-sm font-medium ${isDarkMode ? "text-purple-400" : "text-purple-600"}`}
+                              >
+                                {company.title}
+                              </p>
+                              <p
+                                className={`text-sm font-medium ${isDarkMode ? "text-purple-400" : "text-purple-600"}`}
+                              >
+                                {company.period}
+                              </p>
+
+                              {/* Company Certificates */}
+                              {/* {company.certificates && company.certificates.length > 0 && (
+                                <div className="mt-4 flex flex-wrap gap-3">
+                                  {company.certificates.map((cert, index) => (
+                                    <img
+                                      key={index}
+                                      src={cert.src}
+                                      alt={cert.alt || "Certificate"}
+                                      className="h-16 w-16 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform"
+                                      onClick={() => setPreviewSrc(cert.src)}
+                                    />
+                                  ))}
+                                </div>
+                              )} */}
+                              <button
+                                onClick={() => setPreviewCompany(company)}
+                                className={`mt-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 shadow-sm hover:shadow-md ${isDarkMode
+                                  ? "bg-purple-700 text-white hover:bg-purple-600"
+                                  : "bg-purple-100 text-purple-700 hover:bg-purple-200"
+                                  }`}
+                              >
+                                View Certificates
+                              </button>
+                            </motion.div>
+                          </div>
+                        </div>
+                        {previewCompany && (
+                          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center">
+                            <div className="relative bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-2xl max-w-3xl w-[90%] max-h-[90vh] overflow-y-auto animate-fade-in-up">
+
+                              {/* Close button */}
+                              <button
+                                onClick={() => setPreviewCompany(null)}
+                                className="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl font-bold"
+                              >
+                                ×
+                              </button>
+
+                              {/* Header */}
+                              <h2 className="text-2xl font-bold mb-4 text-center text-purple-700 dark:text-purple-300">
+                                {previewCompany.company} – Certificates & Awards
+                              </h2>
+
+                              {/* Certificate Grid */}
+                              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                {previewCompany.certificates?.map((cert, index) => (
+                                  <div
+                                    key={index}
+                                    className="relative p-2 rounded-xl bg-white/10 dark:bg-gray-700 backdrop-blur-md shadow-md hover:shadow-lg transition-all flex flex-col items-center text-center"
+                                  >
+                                    {cert.image && (
+                                      <img
+                                        src={cert.image}
+                                        alt={cert.title || "Certificate"}
+                                        className="w-full h-32 object-cover rounded-lg mb-2 cursor-pointer hover:scale-105 transition-transform"
+                                        onClick={() => window.open(cert.image, "_blank")}
+                                      />
+                                    )}
+
+                                    {cert.title && (
+                                      <p className="text-sm font-medium text-purple-300 mb-2">{cert.title}</p>
+                                    )}
+
+                                    {cert.pdf && (
+                                      <a
+                                        href={cert.pdf}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-3 py-1 rounded-md text-sm font-semibold bg-purple-600 text-white hover:bg-purple-700 transition"
+                                      >
+                                        View PDF
+                                      </a>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                        {/* {previewSrc && (
+                          <div
+                            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+                            onClick={() => setPreviewSrc(null)}
+                          >
+                            <img
+                              src={previewSrc}
+                              alt="Preview"
+                              className="max-w-full max-h-[90vh] rounded-lg shadow-xl border-4 border-white"
+                            />
+                          </div>
+                        )} */}
+                        {/* Roles within Company */}
+                        <div className="ml-20 md:ml-0 space-y-8">
+
+                          {company.roles.map((role, roleIndex) => {
+                            const isExpanded = expandedRole?.companyIndex === companyIndex && expandedRole?.roleIndex === roleIndex;
+                            const isRight = companyIndex % 2 !== 0
+                            return (
+                              <motion.div
+                                key={roleIndex}
+                                initial={{ opacity: 0, x: isRight ? 30 : -30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: roleIndex * 0.1, duration: 0.5 }}
+                                viewport={{ once: true }}
+                                //className={`${companyIndex % 2 === 0 ? "md:mr-auto md:pr-16" : "md:ml-auto md:pl-16"} max-w-6xl`}
+                                className="w-full"
+                              >
+                                <div className={`flex flex-col md:flex-row ${isRight ? "md:flex-row-reverse" : ""} gap-4`}>
+                                  {/* Role Card */}
+                                  <div
+                                    onClick={() =>
+                                      setExpandedRole((prev) =>
+                                        prev?.companyIndex === companyIndex && prev?.roleIndex === roleIndex
+                                          ? null
+                                          : { companyIndex, roleIndex }
+                                      )
+                                    }
+                                    className={`cursor-pointer w-full md:w-1/2 p-6 rounded-2xl ${isDarkMode ? "bg-gray-800 border border-gray-700" : "bg-gray-50 border border-gray-200"
+                                      } shadow-md hover:shadow-xl transition-all duration-300`}
+                                  >
+                                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                      <h5 className={`text-xl font-semibold ${isDarkMode ? "text-white" : "text-gray-800"}`}>
+                                        {role.title}
+                                      </h5>
+                                      <span
+                                        className={`text-sm font-medium px-3 py-1 rounded-full mt-2 md:mt-0 ${isDarkMode ? "bg-purple-900 text-purple-300" : "bg-purple-100 text-purple-700"
+                                          }`}
+                                      >
+                                        {role.period}
+                                      </span>
+                                    </div>
+
+                                    {/* <p className={`mb-4 leading-relaxed ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
+                                      {role.description}
+                                    </p> */}
+
+                                    <div className="flex flex-wrap gap-2">
+                                      {role.technologies.map((tech, techIndex) => (
+                                        <span
+                                          key={techIndex}
+                                          className={`px-3 py-1 rounded-full text-sm font-medium ${isDarkMode ? "bg-gray-700 text-gray-300" : "bg-white text-gray-700 border border-gray-200"
+                                            }`}
+                                        >
+                                          {tech}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+
+                                  {/* Sidebar Projects */}
+                                  {isExpanded && (
+                                    <motion.div
+                                      initial={{ x: isRight ? -50 : 50, opacity: 0 }}
+                                      animate={{ x: 0, opacity: 1 }}
+                                      transition={{ duration: 0.6 }}
+                                      className={`w-full md:w-1/2 p-5 rounded-xl shadow-md border-l-4 ${isDarkMode
+                                        ? "bg-gray-700/50 border-l-purple-500"
+                                        : "bg-white border-l-purple-500"
+                                        }`}
+                                    >
+                                      <h6 className={`text-lg font-semibold mb-4 ${isDarkMode ? "text-purple-400" : "text-purple-600"}`}>
+                                        Key Projects:
+                                      </h6>
+
+                                      <div className="space-y-4">
+                                        {role.projects.map((project, projectIndex) => (
+
+                                          <motion.div
+                                            key={projectIndex}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: projectIndex * 0.1, duration: 0.4 }}
+                                            whileHover={{ scale: 1.02, y: -2 }}
+                                            className={`p-4 rounded-lg shadow-sm ${isDarkMode ? "bg-gray-800" : "bg-purple-50"
+                                              }`}
+                                          >
+                                            <div className="flex justify-between items-center mb-2">
+                                              <h6 className={`font-semibold text-md ${isDarkMode ? "text-white" : "text-gray-800"}`}>
+                                                {project.name}
+                                              </h6>
+                                              <span
+                                                className={`text-xs px-2 py-1 rounded-full ${isDarkMode ? "bg-pink-900 text-pink-300" : "bg-pink-100 text-pink-700"
+                                                  }`}
+                                              >
+                                                {project.duration}
+                                              </span>
+                                            </div>
+                                            <p className={`text-sm ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
+                                              {project.description}
+                                            </p>
+                                            {/* Certificates Thumbnails */}
+                                            {/* {project.certificates?.length > 0 && (
+                                              <div className="flex gap-3 mt-3 flex-wrap">
+                                                {project.certificates.map((cert, certIndex) => (
+                                                  <img
+                                                    key={certIndex}
+                                                    src={cert.src}
+                                                    alt={cert.alt || "Certificate"}
+                                                    className="h-16 w-16 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform"
+                                                    onClick={() => setPreviewSrc(cert.src)}
+                                                  />
+                                                ))}
+                                              </div>
+                                            )} */}
+                                          </motion.div>
+                                        ))}
+                                      </div>
+                                      {/* Certificates Section - place this after the above div */}
+
+                                    </motion.div>
+                                  )}
+                                </div>
+                              </motion.div>
+                            );
+                          })}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             </motion.div>
           </div>
