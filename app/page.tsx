@@ -429,17 +429,6 @@ export default function Portfolio() {
       description: "My favorite hour to dream, think, or just be 🌌",
     },
   ]
-  
-  certificates: [
-    {
-      name: "Oracle PL/SQL Certification",
-      img: "/certificates/oracle-plsql.png"
-    },
-    {
-      name: "Secure Code Practices",
-      img: "/certificates/secure-code.png"
-    }
-  ]
 
   const renderStickyNote = (note: any, index: number) => {
     const baseClasses = `absolute cursor-pointer transform transition-all duration-300 z-10 ${note.rotation}`
@@ -735,7 +724,7 @@ export default function Portfolio() {
                     className={`px-3 py-2 text-sm rounded-md transition-all duration-300 ${activeSection === note.id
                       ? isDarkMode
                         ? "bg-purple-600 text-white"
-                        : "bg-purple-100 text-purple-700"
+                        : "bg-red-100 text-red-700"
                       : isDarkMode
                         ? "text-gray-300 hover:bg-gray-700"
                         : "text-gray-700 hover:bg-gray-100"
@@ -876,7 +865,7 @@ export default function Portfolio() {
           {/* Light string decor for light mode */}
           <div className="absolute top-10 left-10 z-10 dark:hidden flex flex-row gap-10">
             <motion.img
-              src="/tree.png"
+              src="/tree2.PNG"
               className="w-72 h-72"
               // animate={{
               //   rotate: [0, 3, -3, 0],
@@ -889,7 +878,7 @@ export default function Portfolio() {
 
           <div className="absolute top-10 right-10 z-10 dark:hidden flex flex-row gap-10">
             <motion.img
-              src="/tree.png"
+              src="/tree2.PNG"
               className="w-72 h-72"
               // animate={{
               //   rotate: [0, 3, -3, 0],
@@ -978,7 +967,7 @@ export default function Portfolio() {
                       👋
                     </motion.span>
                   </h1>
-                  <p className={`mt-2 text-lg max-w-full mx-auto font-light ${isDarkMode ? "text-gray-300" : "text-red-600"}`}>
+                  <p className={`mt-2 text-lg max-w-full mx-auto font-light ${isDarkMode ? "text-gray-300" : "text-red-800"}`}>
                     Designing with intent. Coding with heart.✨
                   </p>
                 </motion.div>
@@ -1133,7 +1122,7 @@ export default function Portfolio() {
                       }}
                       className="absolute -top-4 -left-4 text-2xl opacity-60"
                     >
-                      <Code className={`w-8 h-8 ${isDarkMode ? "text-purple-400" : "text-purple-600"}`} />
+                      <Code className={`w-8 h-8 ${isDarkMode ? "text-purple-400" : "text-red-600"}`} />
                     </motion.div>
 
                     <motion.div
@@ -1315,7 +1304,7 @@ export default function Portfolio() {
         {/* Tech Stack Section */}
         <section
           id="experience"
-          className={`py-8 transition-colors duration-500 ${isDarkMode ? "bg-gray-900" : "bg-purple-50"}`}
+          className={`py-8 transition-colors duration-500 ${isDarkMode ? "bg-gray-900" : "bg-orange-50"}`}
         >
           <div className="container mx-auto px-6">
             <motion.div
@@ -1325,7 +1314,7 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="max-w-6xl mx-auto"
             >
-              <h2 className="text-5xl font-bold text-center mb-16 mt-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+              <h2 className={`text-5xl font-bold text-center mb-16 mt-16 font-mono ${isDarkMode ? "bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600" : "bg-gradient-to-r from-orange-400 via-red-800 to-rose-300"} bg-clip-text text-transparent tracking-wider`}>
                 &lt;Experience/&gt;
               </h2>
 
@@ -1333,8 +1322,8 @@ export default function Portfolio() {
                 &lt;TechStack/&gt;
               </h3> */}
 
-              <h3 className="text-3xl font-bold text-center mb-8 font-quicksand bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
-                &lt;TechStack/&gt;
+              <h3 className={`text-3xl font-bold text-center mb-8 font-quicksand ${isDarkMode ? "bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600" : "bg-gradient-to-r from-orange-400 via-red-800 to-rose-300"} bg-clip-text text-transparent tracking-wider`}>
+                &lt;Tech_Stack/&gt;
               </h3>
 
               {/* Category Pills */}
@@ -1504,13 +1493,13 @@ export default function Portfolio() {
                 viewport={{ once: true }}
                 className="mt-20"
               >
-                <h3 className="text-3xl font-bold text-center mb-12 font-quicksand bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+                <h3 className={`text-3xl font-bold text-center mb-12 font-quicksand ${isDarkMode ? " bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600" : "bg-gradient-to-r from-orange-400 via-red-800 to-rose-300"} bg-clip-text text-transparent tracking-wider`}>
                   &lt;Professional_Experience/&gt;
                 </h3>
 
                 <div className="relative">
                   {/* Timeline Line */}
-                  <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 via-pink-500 to-blue-500 rounded-full"></div>
+                  <div className={`absolute left-8 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 ${isDarkMode ? "bg-gradient-to-b from-purple-500 via-pink-500 to-blue-500" : "bg-gradient-to-b from-red-800 via-pink-600 to-rose-700"} rounded-full`}></div>
 
                   <div className="space-y-12">
                     {experiences.map((company, companyIndex) => (
@@ -1524,7 +1513,7 @@ export default function Portfolio() {
                       >
                         {/* Company Header */}
                         <div className="flex items-center mb-8">
-                          <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 -translate-x-1/2 w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg z-10">
+                          <div className={`absolute left-8 md:left-1/2 transform md:-translate-x-1/2 -translate-x-1/2 w-20 h-20 ${isDarkMode ? " bg-gradient-to-r from-purple-500 to-pink-500" : "bg-gradient-to-r from-red-800 to-pink-500"}  rounded-full flex items-center justify-center shadow-lg z-10`}>
                             {/* <img
                               src={company.logo}
                               alt={`${company.company} logo`}
@@ -1549,12 +1538,12 @@ export default function Portfolio() {
                                 {company.company}
                               </h4>
                               <p
-                                className={`text-sm font-medium ${isDarkMode ? "text-purple-400" : "text-purple-600"}`}
+                                className={`text-sm font-medium ${isDarkMode ? "text-purple-400" : "text-red-900"}`}
                               >
                                 {company.title}
                               </p>
                               <p
-                                className={`text-sm font-medium ${isDarkMode ? "text-purple-400" : "text-purple-600"}`}
+                                className={`text-sm font-medium ${isDarkMode ? "text-purple-400" : "text-red-900"}`}
                               >
                                 {company.period}
                               </p>
@@ -1577,7 +1566,7 @@ export default function Portfolio() {
                                 onClick={() => setPreviewCompany(company)}
                                 className={`mt-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 shadow-sm hover:shadow-md ${isDarkMode
                                   ? "bg-purple-700 text-white hover:bg-purple-600"
-                                  : "bg-purple-100 text-purple-700 hover:bg-purple-200"
+                                  : "bg-red-100 text-red-700 hover:bg-red-300"
                                   }`}
                               >
                                 View Certificates
@@ -1684,7 +1673,7 @@ export default function Portfolio() {
                                         {role.title}
                                       </h5>
                                       <span
-                                        className={`text-sm font-medium px-3 py-1 rounded-full mt-2 md:mt-0 ${isDarkMode ? "bg-purple-900 text-purple-300" : "bg-purple-100 text-purple-700"
+                                        className={`text-sm font-medium px-3 py-1 rounded-full mt-2 md:mt-0 ${isDarkMode ? "bg-purple-900 text-purple-300" : "bg-red-100 text-red-700"
                                           }`}
                                       >
                                         {role.period}
@@ -1716,10 +1705,10 @@ export default function Portfolio() {
                                       transition={{ duration: 0.6 }}
                                       className={`w-full md:w-1/2 p-5 rounded-xl shadow-md border-l-4 ${isDarkMode
                                         ? "bg-gray-700/50 border-l-purple-500"
-                                        : "bg-white border-l-purple-500"
+                                        : "bg-white border-l-red-900"
                                         }`}
                                     >
-                                      <h6 className={`text-lg font-semibold mb-4 ${isDarkMode ? "text-purple-400" : "text-purple-600"}`}>
+                                      <h6 className={`text-lg font-semibold mb-4 ${isDarkMode ? "text-purple-400" : "text-red-800"}`}>
                                         Key Projects:
                                       </h6>
 
@@ -1787,7 +1776,7 @@ export default function Portfolio() {
         {/* Projects Section */}
         <section
           id="projects"
-          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-800" : "bg-blue-50"}`}
+          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-800" : "bg-amber-50"}`}
         >
           <div className="container mx-auto px-6">
             <motion.div
@@ -1797,7 +1786,7 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="max-w-7xl mx-auto"
             >
-              <h2 className="text-5xl font-bold text-center mb-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+              <h2 className={`text-5xl font-bold text-center mb-16 font-mono ${isDarkMode ? " bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600" : "bg-gradient-to-r from-orange-400 via-red-800 to-rose-300"} bg-clip-text text-transparent tracking-wider`}>
                 &lt;Projects/&gt;
               </h2>
 
@@ -1878,7 +1867,7 @@ export default function Portfolio() {
         {/* Gallery Section */}
         <section
           id="gallery"
-          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-900" : "bg-green-50"}`}
+          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-900" : "bg-yellow-50"}`}
         >
           <div className="container mx-auto px-6">
             <motion.div
@@ -1888,7 +1877,7 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="max-w-6xl mx-auto"
             >
-              <h2 className="text-5xl font-bold text-center mb-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+              <h2 className={`text-5xl font-bold text-center mb-16 font-mono ${isDarkMode ? "bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600" : "bg-gradient-to-r from-orange-400 via-red-800 to-rose-300"} bg-clip-text text-transparent tracking-wider`}>
                 &lt;beyond_work/&gt;
               </h2>
 
@@ -1940,7 +1929,7 @@ export default function Portfolio() {
         {/* Contact Section */}
         <section
           id="contact"
-          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-800" : "bg-pink-50"}`}
+          className={`py-20 transition-colors duration-500 ${isDarkMode ? "bg-gray-800" : "bg-yellow-50"}`}
         >
           <div className="container mx-auto px-6">
             <motion.div
@@ -1950,7 +1939,7 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="max-w-4xl mx-auto"
             >
-              <h2 className="text-5xl font-bold text-center mb-16 font-mono bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent tracking-wider">
+              <h2 className={`text-5xl font-bold text-center mb-16 font-mono ${isDarkMode ? "bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600" : "bg-gradient-to-r from-orange-400 via-red-800 to-rose-300"} bg-clip-text text-transparent tracking-wider`}>
                 &lt;Contact/&gt;
               </h2>
 
