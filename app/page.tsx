@@ -394,13 +394,13 @@ export default function Portfolio() {
   const galleryItems = [
     {
       title: "B.E. Gold Medalist",
-      image: "/convocation.jpg",
+      image: "/convocation.JPG",
       category: "Achievement",
       description: "That one gold medal that made all the hard work sparkle 🏅",
     },
     {
       title: "Cup of Chai",
-      image: "/chai 2.jpg",
+      image: "/Chai2.jpg",
       category: "Comfort",
       description: "Nothing beats a warm cup of chai and peace ☕️",
     },
@@ -424,7 +424,7 @@ export default function Portfolio() {
     },
     {
       title: "Nights",
-      image: "/night.jpg",
+      image: "/night.JPG",
       category: "Mood",
       description: "My favorite hour to dream, think, or just be 🌌",
     },
@@ -456,13 +456,8 @@ export default function Portfolio() {
           transition: { duration: 0.2 },
         }}
         whileTap={{ scale: 0.95 }}
-        className={baseClasses}
-        style={{
-          top: "8%",
-          left: note.left,
-          width: "90px",
-          height: "90px",
-        }}
+        style={{ top: "8%", left: note.left }}
+        className="w-[60px] h-[60px] sm:w-[30px] sm:h-[30px] md:w-[90px] md:h-[90px]"
         onClick={() => scrollToSection(note.id)}
       >
         {/* Different note styles based on type */}
@@ -614,7 +609,6 @@ export default function Portfolio() {
           y: 0,
         }}
         transition={{
-          //delay: 2.0 + index * 0.3,
           duration: 0.6,
           type: "spring",
           bounce: 0.4,
@@ -626,18 +620,15 @@ export default function Portfolio() {
           transition: { duration: 0.1 },
         }}
         whileTap={{ scale: 0.9 }}
-        className={baseClasses}
+        className={`${baseClasses} w-[45px] h-[45px] sm:w-[55px] sm:h-[55px] md:w-[60px] md:h-[60px]`}
         style={{
-          top: "1%", // Moved up since intro text is now above
+          top: "1%",
           left: note.left,
-          width: "60px",
-          height: "60px",
         }}
         onClick={note.action}
       >
-        {/* Small sticky note with simple design */}
         <div className="relative w-full h-full">
-          {/* Small pin at top */}
+          {/* Pin */}
           <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 z-10">
             <div
               className="w-2 h-2 rounded-full"
@@ -648,7 +639,7 @@ export default function Portfolio() {
               }}
             />
           </div>
-          {/* Note body */}
+          {/* Note */}
           <div
             className="w-full h-full flex items-center justify-center"
             style={{
@@ -658,7 +649,9 @@ export default function Portfolio() {
               border: "1px solid rgba(0, 0, 0, 0.05)",
             }}
           >
-            <p className="text-xs font-medium text-gray-700 text-center font-quicksand px-1">{note.label}</p>
+            <p className="text-[10px] sm:text-xs font-medium text-gray-700 text-center font-quicksand px-1">
+              {note.label}
+            </p>
           </div>
         </div>
       </motion.div>
@@ -695,7 +688,8 @@ export default function Portfolio() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 1 }}
-                className={`text-sm sm:text-base md:text-lg lg:text-xl font-mono ${isDarkMode ? "text-purple-500" :"text-red-800" } whitespace-pre`}
+                //className={`text-sm sm:text-base md:text-lg lg:text-xl font-mono ${isDarkMode ? "text-purple-500" :"text-red-800" } whitespace-pre`}
+                className={`text-xs sm:text-sm md:text-base lg:text-xl font-mono max-w-[90vw] break-words whitespace-pre ${isDarkMode ? "text-purple-500" : "text-red-800"}`}
               >
                 <motion.span
                   initial={{ width: 0 }}
@@ -798,7 +792,7 @@ export default function Portfolio() {
             </div>
 
             {/* Mobile Navigation Menu - Always visible */}
-            <nav className="md:hidden flex flex-wrap justify-center gap-2 mt-3">
+            <nav className="md:hidden flex flex-wrap justify-center gap-2 mt-3 mb-6">
               {stickyNotes.map((note) => (
                 <motion.button
                   key={note.id}
@@ -822,7 +816,7 @@ export default function Portfolio() {
         </motion.header>
 
         {/* Hero Section with Large Illustration */}
-        <section id="home" ref={heroRef} className="min-h-screen flex items-center justify-center relative pt-20">
+        <section id="home" ref={heroRef} className="min-h-screen flex items-center justify-center relative pt-40 md:pt-20">
           {/* Hanging string lights - same as before */}
           <div className="absolute top-10 left-10 z-10 hidden dark:flex flex-row gap-10">
             {[...Array(2)].map((_, colIndex) => (
@@ -908,7 +902,7 @@ export default function Portfolio() {
             ))}
           </div> */}
 
-          <div className="w-full max-w-4xl mx-auto px-4">
+          <div className="w-full max-w-4xl mx-auto px-4 sm:px-6">
             {/* Main Illustration Container */}
             <div className="relative w-full">
               {/* Desk Illustration - Takes up 70% of screen width */}
@@ -916,8 +910,10 @@ export default function Portfolio() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="relative mx-auto"
-                style={{ width: "70vw", maxWidth: "1000px" }}
+                className=" flex justify-center items-center w-full max-w-[95vw] sm:max-w-[85vw] md:max-w-[70vw] lg:max-w-[1000px] mx-auto "
+                //className="relative mx-auto"
+                //style={{ width: "70vw", maxWidth: "1000px" }}
+                //style={{ width: "100%", maxWidth: "480px" }}
               >
                 <motion.img
                   key={isDarkMode ? "hero2" : "hero1"}
@@ -926,7 +922,7 @@ export default function Portfolio() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, ease: "easeInOut" }}
-                  className={`w-full h-auto rounded-2xl max-w-[90%] md:max-w-[80%] ${isDarkMode ? "brightness-150 contrast-30" : ""}`}
+                  className={`w-full h-auto rounded-2xl max-w-[95vw] md:max-w-[80%] ${isDarkMode ? "brightness-150 contrast-30" : ""}`}
                 // style={{
                 //   maskImage: "radial-gradient(circle, black 70%, transparent 100%)",
                 //   WebkitMaskImage: "radial-gradient(circle, black 70%, transparent 100%)",
@@ -941,7 +937,8 @@ export default function Portfolio() {
               /> */}
 
                 {/* Small Action Sticky Notes - positioned below the intro */}
-                <div className="absolute w-full" style={{ top: "-45px", left: "-50px" }}>
+                {/* <div className="absolute w-full" style={{ top: "-45px", left: "-50px" }}> */}
+                <div className="absolute w-full" style={{ top: "-45px", left: "0", paddingLeft: "clamp(1rem, 5vw, 3rem)" }}>
                   {actionNotes.map((note, index) => renderActionNote(note, index))}
                 </div>
               </motion.div>
